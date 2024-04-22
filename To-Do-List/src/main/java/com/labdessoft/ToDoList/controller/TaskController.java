@@ -18,44 +18,59 @@ public class TaskController {
     @Autowired
     TaskRepository taskRepository;
 
+    @GetMapping("/id")
+    @Operation(summary = "Pegar por id")
+    public ResponseEntity<Task> buscarPorId(@PathVariable Long id) {
+        Task taskOptional = TaskRepository.findById(id);
+        if (taskOptional != null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return taskOptional.get();
+    }
+
     @GetMapping("/Lista-Tarefas")
     @Operation(summary = "Lista todas as tarefas da lista")
-    public ResponseEntity<List<Task>> listAll() {
-try{
-List<Tasks> taskList = new ArrayList<Tasks>();
-taskRepository.findAll().forEach(taskList::add);
-if(taskList.isEmpty()){
-return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-}
-return null;
-// return new ResponseEntity<>(taskList, HttpStatus.OK);
-} catch (Exception e) {
-return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-}
-}
+    public ResponseEntity<Task> listAll() {
+        // try {
+        //     List<Tasks> taskList = new ArrayList<Tasks>();
+        //     taskRepository.findAll().forEach(taskList::add);
+        //     if (taskList.isEmpty()) {
+        //         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        //     }
+        //     return new ResponseEntity<>(taskList, HttpStatus.OK);
+        // } catch (Exception e) {//
+        //     return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        // }
+    }
 
-
-    @GetMapping("/Adicionar-tarfea")
+    @GetMapping("/Adicionar-Tarefas")
     @Operation(summary = "Adiciona uma tarefa a lista")
-    public void AddTask() {
-    //corrigir quando tiver tempo
+    public ResponseEntity<Tasks> addTask(@RequestBody Tasks newTask) {
+        Tasks task = taskRepository.save(newTask);
+        return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
-    @GetMapping("/Deleterar-tarefa")
+    @GetMapping("/Deletar-Tarefas")
     @Operation(summary = "Deleta uma tarefa da lista")
-    public void DelTask(Tasks task) {
-        try{
-        taskRepository.delete(task);
-        }catch (Exception e) {
-            
+    public ResponseEntity<Task> deletarPorId(@PathVariable Long id) {
+        Task taskOptional = TaskRepository.findById(id);
+        if (taskOptional != null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+        return taskOptional.get();
     }
 
-    @GetMapping("/Editar-tarefa")
+    @GetMapping("/Editar-Tarefas")
     @Operation(summary = "Edita uma tarefa da lista")
-    // public ResponseEntity<List<Task>> EditTask() {
-        public void EditTask() {
-       //corrigir quando tiver tempo
+    public ResponseEntity<Tasks> editTask(@PathVariable Long id, @RequestBody Tasks taskDetails) {
+        var taskOptional = taskRepository.findById(id);
+        if (taskOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        task.setId(id);
+        task.setDescription(taskDetails);
+        return taskRepository.save(task);
+    }
     }
 
-}
+   
