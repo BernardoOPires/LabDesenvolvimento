@@ -38,10 +38,18 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskType type;
 
+    @Enumerated(EnumTYPE.STRING)
+    private TaskPriority priority;
+
     @Schema(name = "Dia para o prazo")
     @Transient
     public Long getDaysRemaining() {
         return dueDate != null ? LocalDate.now().until(dueDate).getDays() : null;
+    }
+
+    @Schema(name = "Tipo: prazo, data ,livre")
+    public enum TaskPriority {
+        HIGH, MEDIUM, LOW
     }
 
     @Schema(name = "Tipo: prazo, data ,livre")

@@ -35,6 +35,7 @@ public class TaskService {
         task.setStartDate(taskDetails.getStartDate());
         task.setDueDate(taskDetails.getDueDate());
         task.setType(taskDetails.getType());
+        task.setPriority(taskDetails.getPriority());
 
         return taskRepository.save(task);
     }
@@ -50,6 +51,12 @@ public class TaskService {
                 .orElseThrow(() -> new IllegalArgumentException("Id n encontrado"));
         task.setCompleted(!task.getCompleted());
         return taskRepository.save(task);
+    }
+
+    public List<Task> findAllOrderByPriority() {
+        return taskRepository.findAll().stream()
+                .sorted(Comparator.comparing(Task::getPriority))
+                .collect(Collectors.toList());
     }
 
 }
