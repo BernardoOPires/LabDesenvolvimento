@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.Comparator;
 
 @Service
 public class TaskService {
@@ -55,8 +57,8 @@ public class TaskService {
 
     public List<Task> findAllOrderByPriority() {
         return taskRepository.findAll().stream()
-                .sorted(Comparator.comparing(Task::getPriority))
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparing(Task::getPriority))//cannot fnd symbol
+                .collect(Collectors.toList());//cannot fnd symbol
     }
 
 }
