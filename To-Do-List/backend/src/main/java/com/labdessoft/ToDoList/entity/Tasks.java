@@ -47,7 +47,7 @@ public class Task {
         return dueDate != null ? LocalDate.now().until(dueDate).getDays() : null;
     }
 
-    @Schema(name = "Tipo: prazo, data ,livre")
+    @Schema(name = "Tipo: alto, medio ,baixo")
     public enum TaskPriority {
         HIGH, MEDIUM, LOW
     }
