@@ -1,3 +1,5 @@
+package com.labdessoft.ToDoList.entity;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import org.springframework.web.bind.annotation.Schema;  
 import java.time.temporal.ChronoUnit;
 
