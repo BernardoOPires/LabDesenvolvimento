@@ -44,7 +44,7 @@ public class Task {
     @Schema(name = "Dia para o prazo")
     @Transient
     public Long getDaysRemaining() {
-        return dueDate != null ? Integer.pa(LocalDate.now().until(dueDate).getDays())  : null; 
+        return dueDate != null ? Integer.parseInt(LocalDate.now().until(dueDate).getDays())  : null; 
     }
 
     @Schema(name = "Tipo: alto, medio ,baixo")
