@@ -14,6 +14,8 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.Schema;  
+import java.time.temporal.ChronoUnit;
+
 
 @Entity
 @Getter
@@ -42,13 +44,16 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskType type;
 
-    @Enumerated(EnumTYPE.STRING)
+    @Enumerated(EnumType.STRING)
     private TaskPriority priority;
 
     @Schema(name = "Dia para o prazo")
     @Transient
     public Long getDaysRemaining() {
-        return dueDate != null ? Integer.parseInt(LocalDate.now().until(dueDate).getDays())  : null; 
+        if (dueDate != null) {
+            return LocalDate.now().until(dueDate, ChronoUnit.DAYS);
+        }
+        return null;
     }
 
     @Schema(name = "Tipo: alto, medio ,baixo")
