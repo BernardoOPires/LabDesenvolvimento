@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import org.springframework.web.bind.annotation.Schema;  
+import io.swagger.v3.oas.annotations.media.Schema; 
 import java.time.temporal.ChronoUnit;
 
 
