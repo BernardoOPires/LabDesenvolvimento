@@ -4,17 +4,12 @@ import com.labdessoft.ToDoList.entity.Task;
 import com.labdessoft.ToDoList.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.Comparator;
-import java.util.Optional;  
-import java.util.List;  
-import java.util.stream.Collectors;  
-import java.util.Comparator;  
-
-import java.time.LocalDate;  
+ 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 

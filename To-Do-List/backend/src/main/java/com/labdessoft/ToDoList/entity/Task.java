@@ -1,14 +1,13 @@
 package com.labdessoft.ToDoList.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Transient;
+
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Getter;
@@ -16,8 +15,6 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import io.swagger.v3.oas.annotations.media.Schema; 
 import java.time.temporal.ChronoUnit;
 
 
@@ -32,8 +29,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "A descrição não pode ser vazia.")
-    @Size(min = 10, message = "Descrição da tarefa deve possuir pelo menos 10 caracteres")
+
     @Schema(name = "Detalhes da tarefa")
     private String description;
 
