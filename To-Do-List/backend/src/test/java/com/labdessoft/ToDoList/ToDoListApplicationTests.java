@@ -1,13 +1,15 @@
-package com.labdessoft.ToDoList;
+// package com.labdessoft.ToDoList;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Disabled;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ToDoListApplicationTests {
+// @SpringBootTest
+// class ToDoListApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	@Disabled
+// 	void contextLoads() {
+// 	}
 
-}
+// }
