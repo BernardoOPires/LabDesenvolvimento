@@ -1,22 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.4</version>
-		<relativePath /> 
+		<version>3.2.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.labdessoft</groupId>
 	<artifactId>ToDoList</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ToDoList</name>
-	<description>roteiro 01 lab desenvolvimento de software</description>
+	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version><!--1.18.30 1.18.32 da lombock-->
+		<java.version>17</java.version>
 	</properties>
+	<!-- <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies> -->
+
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -73,6 +85,7 @@
 				<exclusion>
 					<groupId>junit</groupId>
 					<artifactId>junit</artifactId>
+				
 				</exclusion>
 			</exclusions>
 			<scope>test</scope>
@@ -80,14 +93,14 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.8.2</version> 
+			<version>5.7.0</version>
 
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.8.2</version> <!-- Use a versão mais recente ou a que for compatível com suas necessidades -->
+			<version>5.7.0</version> <!-- Use a versão mais recente ou a que for compatível com suas necessidades -->
 			<scope>test</scope>
 		</dependency>
 		<dependency>
