@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import io.swagger.v3.oas.annotations.media.Schema;
+// import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.temporal.ChronoUnit;
 
 
@@ -30,7 +30,7 @@ public class Task {
     private Long id;
 
 
-    @Schema(name = "Detalhes da tarefa")
+    // @Schema(name = "Detalhes da tarefa")
     private String description;
 
     private Boolean completed;
@@ -47,7 +47,7 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskPriority priority;
 
-    @Schema(name = "Dia para o prazo")
+    // @Schema(name = "Dia para o prazo")
     @Transient
     public Long getDaysRemaining() {
         if (dueDate != null) {
@@ -56,12 +56,12 @@ public class Task {
         return null;
     }
 
-    @Schema(name = "Tipo: alto, medio ,baixo")
+    // @Schema(name = "Tipo: alto, medio ,baixo")
     public enum TaskPriority {
         HIGH, MEDIUM, LOW
     }
 
-    @Schema(name = "Tipo: prazo, data ,livre")
+    // @Schema(name = "Tipo: prazo, data ,livre")
     public enum TaskType {
         WITH_DEADLINE, FIXED_DATE, FREE
     }

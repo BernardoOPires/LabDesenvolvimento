@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.Comparator;
  
-import io.swagger.v3.oas.annotations.media.Schema;
+// import io.swagger.v3.oas.annotations.media.Schema;
 
 
 
@@ -21,7 +21,7 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    @Schema(name = "O tipo e data ja são passados pelo objeto task")
+    // @Schema(name = "O tipo e data ja são passados pelo objeto task")
     public Task createTask(Task task) {
         return taskRepository.save(task);
     }
