@@ -1,7 +1,0 @@
-com\labdessoft\ToDoList\entity\Task$TaskPriority.class
-com\labdessoft\ToDoList\controller\TaskController.class
-com\labdessoft\ToDoList\ToDoListApplication.class
-com\labdessoft\ToDoList\repository\TaskRepository.class
-com\labdessoft\ToDoList\service\TaskService.class
-com\labdessoft\ToDoList\entity\Task.class
-com\labdessoft\ToDoList\entity\Task$TaskType.class
