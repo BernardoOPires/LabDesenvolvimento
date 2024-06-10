@@ -45,75 +45,85 @@ class ToDoList extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 4,
+                    itemCount: 5,
                     itemBuilder: (context, index) {
                       return Container(
-                        
-                        margin: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.3, 20, MediaQuery.of(context).size.width * 0.3, 0
-                            ),
-                        color: index % 2 == 0 ? const Color(0xFF83F471) : const Color(0xFFFF4646),
-                        height: 100,
+                        margin: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.3,
+                            20,
+                            MediaQuery.of(context).size.width * 0.3,
+                            0),
+                        height: 75,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              
-                              width: 300, 
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  labelText: "Item $index", 
-                                  border: const OutlineInputBorder(), 
+                            Container(
+                              color: index % 2 == 0
+                                  ? const Color(0xFF83F471)
+                                  : const Color(0xFFFF4646),
+                              width: 200,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      labelText: "Item $index",
+                                      border: InputBorder.none),
                                 ),
                               ),
                             ),
-                            Text('LIVRE'),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10), 
-                              child: InkWell(
-                                onTap: () {
-                                
-                                },
-                                child: const Icon(Icons.edit,
-                                    size:
-                                        24), 
+                            Center(
+                              child: Container(
+                                 color: index % 2 == 0
+                                    ? const Color(0xFF83F471)
+                                    : const Color(0xFFFF4646),
+                                 width: 150,
+                                 height: 50,
+                                child: const Center(child: Text("Livre"))
                               ),
                             ),
+                            const SizedBox(width: 5),
+                           InkWell(
+                                onTap: () {},
+                                child: const Icon(Icons.edit, size: 24),
+                              ),
                           ],
                         ),
                       );
                     },
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 InkWell(
-  child: Container(
-    width: MediaQuery.of(context).size.width * 0.4,
-    height: 60,
-    decoration: BoxDecoration(
-      color: Colors.white, 
-     
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: const Offset(0, 3), 
-        ),
-      ],
-    ),
-    child: const Center(
-      child: Text(
-        "+",
-        style: TextStyle(
-          fontSize: 60,
-          color: Colors.black, 
-        ),
-      ),
-    ),
-  ),
-),
-const SizedBox(height: 40,),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "+",
+                        style: TextStyle(
+                          fontSize: 60,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
               ],
             ),
           ),
