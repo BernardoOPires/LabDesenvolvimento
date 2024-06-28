@@ -23,6 +23,7 @@ public class TaskService {
 
     // @Schema(name = "O tipo e data ja são passados pelo objeto task")
     public Task createTask(Task task) {
+        System.out.println(task);
         return taskRepository.save(task);
     }
 

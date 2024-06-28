@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/apiService/apiService.dart';
+import 'package:frontend/tarefas/entityTest.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,18 +29,35 @@ class ToDoList extends StatefulWidget {
   State<ToDoList> createState() => _ToDoListState();
 }
 
+// Estado para o StatefulWidget ToDoList.
 class _ToDoListState extends State<ToDoList> {
+  List<TarefasTest> tasks = []; // Lista para armazenar tarefas
+  final ApiService apiService = ApiService(); // Instância do serviço API
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchTasks();
+  }
+
+  void _fetchTasks() async {
+    try {
+      var fetchedTasks = await apiService.fetchTasks();
+      setState(() {
+        tasks = fetchedTasks;
+      });
+    } catch (e) {
+      print('Erro na tarefa: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-       
-    
-
     int typeTest = 1;
     List<TextEditingController> controllerTest = [];
-    for(int i = 0; i <= 8; i++ ){
-controllerTest.add(TextEditingController());
+    for (int i = 0; i <= 8; i++) {
+      controllerTest.add(TextEditingController());
     }
-
 
     return Scaffold(
       body: Container(
@@ -60,13 +79,14 @@ controllerTest.add(TextEditingController());
               'To-do-List',
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
-             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.015 ,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.015,
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 8,
+                itemCount: tasks.length,
                 itemBuilder: (context, index) {
+                  final task = tasks[index];
                   return Container(
                     margin: EdgeInsets.fromLTRB(
                         MediaQuery.of(context).size.width * 0.1,
@@ -83,44 +103,39 @@ controllerTest.add(TextEditingController());
                     ),
                     height: 75,
                     child: ListTile(
-                      //DESCRIÇÃO
-                      title:  TextField(
-                        controller: controllerTest[index],
+                      title: TextField(
+                        controller: TextEditingController(
+                            text: task
+                                .description), // controller para adicioar texto
                         decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          //adicione a vairavel para permitir editar
-                          enabled: true,
-                          label: Text("Insira o nome da tarefa")
-                        ),
+                            border: InputBorder.none,
+                            enabled: true,
+                            label: Text("Insira o nome da tarefa")),
+                        onSubmitted: (newValue) {
+                          //atualizar ao colocar nova descrição
+                          task.description = newValue;
+                          apiService.updateTask(task.id.toString(),
+                              task.toJson()); //atualizar back
+                        },
                       ),
-                      //DATA
-                      subtitle: typeTest == 1 ?
-                      const Text("Para: XX/XX/XXXX  Dias Restantes: XX") :
-                      typeTest == 2 ?
-                      const Text("Dias restantes: XX") :
-                      const Text("Sem prazo"),
+                      subtitle: Text(
+                          "Para: ${task.dueDate.toIso8601String()}"), //data da tarefa
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          //EDIT
                           IconButton(
                             icon: const Icon(Icons.edit),
                             onPressed: () {
-                              setState(() {
-                                 if(typeTest != 3){
-                                  typeTest++;
-                                }else{
-                                  typeTest = 1;
-                                }
-                              });
-                               
+                              // Abre um modal ou outra página para editar a tarefa mais detalhadamente
                             },
                           ),
-                          //DELETE
-                          //Para deletar vc deve integrar e remover da lista com um setstate, mas primeiro vc deve puxar a lista de tarefas do back
                           IconButton(
                             icon: const Icon(Icons.delete),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await apiService.deleteTask(
+                                  task.id.toString()); // deletar tarefa
+                              _fetchTasks(); // muda a lista com delete
+                            },
                           ),
                         ],
                       ),
@@ -129,11 +144,10 @@ controllerTest.add(TextEditingController());
                 },
               ),
             ),
-             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.015 ,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.015,
             ),
             InkWell(
-              onTap: () {},
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.245,
                 height: 60,
@@ -149,7 +163,7 @@ controllerTest.add(TextEditingController());
                   ],
                 ),
                 child: const Center(
-                  child:  Text(
+                  child: Text(
                     "+",
                     style: TextStyle(
                       fontSize: 40,
@@ -158,9 +172,21 @@ controllerTest.add(TextEditingController());
                   ),
                 ),
               ),
+              onTap: () async {
+                TarefasTest newTask = TarefasTest(
+                  id: 0, // back arruma id
+                  description: 'Nova Tarefa',
+                  startDate: DateTime.now(),
+                  dueDate: DateTime.now().add(const Duration(days: 7)),
+                  type: 1,
+                  priority: 1,
+                );
+                await apiService.addTask(newTask.toJson());
+                _fetchTasks(); // att com o novo item
+              },
             ),
-             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05 ,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
           ],
         ),
@@ -168,3 +194,33 @@ controllerTest.add(TextEditingController());
     );
   }
 }
+
+TarefasTest createEmptyTask() {
+  return TarefasTest(
+    id: 0, // id temp
+    description: '',
+    startDate: DateTime.now(),
+    dueDate: DateTime.now().add(const Duration(days: 7)),
+    type: 1, // crie metodo para inserir os 2 valores
+    priority: 1,
+  );
+}
+
+
+//  Exemplo do uso da lista
+// ListView.builder(
+//   itemCount: tasks.length,
+//   itemBuilder: (context, index) {
+//     TarefasTest task = tasks[index];
+//     return ListTile(
+//       title: Text(task.description),
+//       subtitle: Text('Due Date: ${task.dueDate}'),
+//       trailing: IconButton(
+//         icon: Icon(task.completed ? Icons.check_box : Icons.check_box_outline_blank),
+//         onPressed: () {
+//           // Adicionar lógica para alternar o estado de completado
+//         },
+//       ),
+//     );
+//   },
+// )
